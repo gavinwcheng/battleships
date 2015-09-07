@@ -2,7 +2,7 @@ class Ship
 
   DEFAULT_SIZE = 1
 
-  attr_reader :location, :size, :size_range
+  attr_reader :location, :size, :size_range, :direction
 
   def initialize size = DEFAULT_SIZE
     @size_range = [1, 2]
@@ -12,6 +12,10 @@ class Ship
 
   def locate location
     @location = location
+  end
+
+  def direct direction
+    @direction = direction
   end
 
 end

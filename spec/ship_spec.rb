@@ -2,6 +2,7 @@ require "ship"
 
 describe Ship do
   let(:location) { double(:location) }
+  let(:direction) { double(:direction) }
 
   it "responds to location" do
     expect(subject).to respond_to :location
@@ -16,6 +17,15 @@ describe Ship do
     expect(subject.location).to eq location
   end
 
+  it "responds to direct" do
+    expect(subject).to respond_to(:direct).with(1).argument
+  end
+
+  it "is pointing at the assigned direction" do
+    subject.direct direction
+    expect(subject.direction).to eq direction
+  end
+  
   describe '#new' do
 
     it 'accepts size as a parameter' do

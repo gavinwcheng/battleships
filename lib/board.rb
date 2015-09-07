@@ -5,8 +5,9 @@ class Board
     @ships = []
   end
 
-  def place ship, location
+  def place ship, location, direction
     @ships.push ship
     ship.locate location
+    ship.direct direction
   end
 end
