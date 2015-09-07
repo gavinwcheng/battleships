@@ -1,7 +1,17 @@
 class Ship
-  attr_reader :location
+
+  DEFAULT_SIZE = 1
+
+  attr_reader :location, :size, :size_range
+
+  def initialize size = DEFAULT_SIZE
+    @size_range = [1, 2]
+    fail "Size outside of range!" unless size_range.include?(size)
+    @size = size
+  end
 
   def locate location
     @location = location
   end
+
 end
