@@ -1,6 +1,7 @@
 class Ship
   attr_reader :location
 
-  # def locate location
-  # end
+  def locate location
+    @location = location
+  end
 end
