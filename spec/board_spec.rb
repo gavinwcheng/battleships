@@ -4,6 +4,7 @@ require "board"
 describe Board do
   let(:ship) { double(:ship, locate: nil) }
   let(:location) { double(:location) }
+  # let(:size) { :size }
 
   describe "#place" do
     it "responds to place with 2 arguments" do
