@@ -3,6 +3,9 @@ require "ship"
 describe Ship do
   let(:location) { double(:location) }
   let(:direction) { double(:direction) }
+  # let(:test_ship){ double(:test_ship, location: ["A",1],
+  #                                     direction: "South",
+  #                                     size: 2)}
 
   it "responds to location" do
     expect(subject).to respond_to :location
@@ -25,7 +28,7 @@ describe Ship do
     subject.direct direction
     expect(subject.direction).to eq direction
   end
-  
+
   describe '#new' do
 
     it 'accepts size as a parameter' do
@@ -38,4 +41,19 @@ describe Ship do
 
   end
 
+  it 'provides coordinates based on its location, direction and size' do
+    ship = Ship.new(2)
+    ship.locate ["A",1]
+    ship.direct "South"
+    expect(ship.coordinates).to eq [["A",1], ["A",2]]
+  end
+
+  it 'raises an error if the ship coordinates are off the board' do
+    ship = Ship.new(2)
+    ship.locate ["A",1]
+    ship.direct "North"
+    expect{ ship.coordinates }.to raise_error "Ship not on the board"
+  end
+
 end
+
