@@ -1,4 +1,4 @@
-require "ship"
+require_relative "../lib/ship.rb"
 
 describe Ship do
   let(:location) { double(:location) }
@@ -43,17 +43,17 @@ describe Ship do
 
   it 'provides coordinates based on its location, direction and size' do
     ship = Ship.new(2)
-    ship.locate ["A",1]
+    ship.locate [1,1]
     ship.direct "South"
-    expect(ship.coordinates).to eq [["A",1], ["A",2]]
+    expect(ship.coordinates).to eq [[1,1], [1,2]]
   end
 
   it 'raises an error if the ship coordinates are off the board' do
     ship = Ship.new(2)
-    ship.locate ["A",1]
+    ship.locate [1,0]
     ship.direct "North"
-    expect{ ship.coordinates }.to raise_error "Ship not on the board"
+    ship.coordinates
+    expect{ ship.on_board([10,10]) }.to raise_error "Ship not on the board"
   end
 
 end
-
