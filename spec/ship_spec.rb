@@ -56,4 +56,54 @@ describe Ship do
     expect{ ship.on_board([10,10]) }.to raise_error "Ship not on the board"
   end
 
+  describe "#hit?" do
+    
+    it "reports true if hit" do
+      ship = Ship.new(2)
+      ship.locate [1,0]
+      ship.direct "North"
+      ship.coordinates
+      expect(ship.hit?([1,0])).to eq true
+    end
+
+    it "reports false if miss" do
+      ship = Ship.new(2)
+      ship.locate [1,0]
+      ship.direct "North"
+      ship.coordinates
+      expect(ship.hit?([1,10])).to eq false
+    end
+
+    it "replaces the coordinate which got hit with Hit" do
+      ship = Ship.new(3)
+      ship.locate [1,1]
+      ship.direct "South"
+      ship.coordinates
+      ship.hit?([1,1])
+      expect(ship.coords).to eq ["Hit",[1,2],[1,3]]
+    end
+
+  end
+
+  describe "#sunk?" do
+
+    it "reports a true if sunk" do
+      ship = Ship.new(1)
+      ship.locate [1,1]
+      ship.direct "South"
+      ship.coordinates
+      ship.hit?([1,1])
+      expect(ship.sunk?).to eq true
+    end
+
+    it "reports a false if not sunk" do
+      ship = Ship.new(1)
+      ship.locate [1,1]
+      ship.direct "South"
+      ship.coordinates
+      ship.hit?([1,10])
+      expect(ship.sunk?).to eq false
+    end
+
+  end
 end

@@ -44,4 +44,17 @@ class Ship
     end
   end
 
+  def hit?(hit_coords)
+    if @coords.include?(hit_coords)
+      @coords.map!{ |x| x == hit_coords ? "Hit" : x }
+      true
+    else
+      false
+    end
+  end
+
+  def sunk?
+    if @coords - ["Hit"] == []; true else false end
+  end
+
 end
