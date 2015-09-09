@@ -47,11 +47,22 @@ describe Board do
     end
   end
 
+  before do
+    allow(ship).to receive(:sunk?) {false}
+  end
+
   describe '#receieve_fire' do
     it 'returns hit when ship is hit' do
       allow(ship).to receive(:hit?) {true}
       subject.place ship, location, direction
       expect(subject.receive_fire([1,1])).to eq("hit!")
+    end
+
+    it "returns hit and a ship is sunk when a ship is sunk" do
+      allow(ship).to receive(:hit?) {true}
+      allow(ship).to receive(:sunk?) {true}
+      subject.place ship, location, direction
+      expect(subject.receive_fire([1,1])).to eq("hit and a ship is sunk!")
     end
 
     it 'returns miss when ship is missed' do

@@ -40,7 +40,11 @@ class Board
     @ships.each do |ship|
       if ship.hit?(hit_coords) == true
         @hits << hit_coords
-        return "hit!"
+        if ship.sunk? == true
+          return "hit and a ship is sunk!"
+        else
+          return "hit!"
+        end
       end
     end
     @misses << hit_coords
