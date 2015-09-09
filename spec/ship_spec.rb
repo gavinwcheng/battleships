@@ -57,7 +57,7 @@ describe Ship do
   end
 
   describe "#hit?" do
-    
+
     it "reports true if hit" do
       ship = Ship.new(2)
       ship.locate [1,0]

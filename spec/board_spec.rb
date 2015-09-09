@@ -54,15 +54,24 @@ describe Board do
   describe '#receieve_fire' do
     it 'returns hit when ship is hit' do
       allow(ship).to receive(:hit?) {true}
+      allow(subject).to receive(:lost?) {false}
       subject.place ship, location, direction
       expect(subject.receive_fire([1,1])).to eq("hit!")
     end
 
     it "returns hit and a ship is sunk when a ship is sunk" do
+      allow(subject).to receive(:lost?) {false}
       allow(ship).to receive(:hit?) {true}
       allow(ship).to receive(:sunk?) {true}
       subject.place ship, location, direction
       expect(subject.receive_fire([1,1])).to eq("hit and a ship is sunk!")
+    end
+
+    it 'returns "you have won" when all ships are sunk' do
+      allow(ship).to receive(:hit?) {true}
+      allow(ship).to receive(:sunk?) {true}
+      subject.place ship, location, direction
+      expect(subject.receive_fire([1,1])).to eq("you have won!")
     end
 
     it 'returns miss when ship is missed' do
@@ -81,6 +90,16 @@ describe Board do
       allow(ship).to receive(:hit?) {false}
       subject.place ship, location, direction
       expect {subject.receive_fire([1,2])}.to change {subject.misses.length}.by(1)
+    end
+  end
+
+   describe '#lost' do
+    it 'returns "you have lost" when all ships sunk' do
+      allow(ship).to receive(:hit?) {true}
+      allow(ship).to receive(:sunk?) {true}
+      subject.place ship, location, direction
+      subject.receive_fire([1,1])
+      expect(subject.lost?).to eq(true)
     end
 
   end

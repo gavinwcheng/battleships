@@ -40,14 +40,29 @@ class Board
     @ships.each do |ship|
       if ship.hit?(hit_coords) == true
         @hits << hit_coords
-        if ship.sunk? == true
-          return "hit and a ship is sunk!"
+        if self.lost? == true
+          return "you have won!"
         else
-          return "hit!"
+          if ship.sunk? == true
+            return "hit and a ship is sunk!"
+          else
+            return "hit!"
+          end
         end
       end
     end
     @misses << hit_coords
     return "miss"
   end
+
+  def lost?
+    @ships.each do |ship|
+      if ship.sunk? == false
+        return false
+      end
+    end
+    true
+  end
+
+
 end
