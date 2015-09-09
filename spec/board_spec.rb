@@ -46,4 +46,18 @@ describe Board do
       expect(subject.overlap?(ship_2, ship_1)).to eq(false)
     end
   end
+
+  describe '#receieve_fire' do
+    it 'returns hit when ship is hit' do
+      allow(ship).to receive(:hit?) {true}
+      subject.place ship, location, direction
+      expect(subject.receive_fire([1,1])).to eq("hit!")
+    end
+
+    it 'returns miss when ship is missed' do
+      allow(ship).to receive(:hit?) {false}
+      subject.place ship, location, direction
+      expect(subject.receive_fire([1,2])).to eq("miss")
+    end
+  end
 end

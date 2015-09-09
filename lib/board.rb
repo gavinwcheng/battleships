@@ -1,3 +1,5 @@
+require_relative 'ship'
+
 class Board
   DEFAULT_BOARD_SIZE = [5,5]
 
@@ -30,5 +32,14 @@ class Board
         end
     end
     false
+  end
+
+  def receive_fire(hit_coords)
+    @ships.each do |ship|
+      if ship.hit?(hit_coords) == true
+        return "hit!"
+      end
+    end
+    return "miss"
   end
 end
