@@ -3,11 +3,13 @@ require_relative 'ship'
 class Board
   DEFAULT_BOARD_SIZE = [5,5]
 
-  attr_reader :ships
+  attr_accessor :ships, :hits, :misses
 
   def initialize(board_size = DEFAULT_BOARD_SIZE)
     @ships = []
     @board_size = board_size
+    @hits = []
+    @misses = []
   end
 
   #make ships
@@ -37,9 +39,11 @@ class Board
   def receive_fire(hit_coords)
     @ships.each do |ship|
       if ship.hit?(hit_coords) == true
+        @hits << hit_coords
         return "hit!"
       end
     end
+    @misses << hit_coords
     return "miss"
   end
 end

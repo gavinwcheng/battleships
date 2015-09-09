@@ -59,5 +59,18 @@ describe Board do
       subject.place ship, location, direction
       expect(subject.receive_fire([1,2])).to eq("miss")
     end
+
+    it 'saves a hit' do
+      allow(ship).to receive(:hit?) {true}
+      subject.place ship, location, direction
+      expect {subject.receive_fire([1,1])}.to change {subject.hits.length}.by(1)
+    end
+
+    it 'saves a miss' do
+      allow(ship).to receive(:hit?) {false}
+      subject.place ship, location, direction
+      expect {subject.receive_fire([1,2])}.to change {subject.misses.length}.by(1)
+    end
+
   end
 end
