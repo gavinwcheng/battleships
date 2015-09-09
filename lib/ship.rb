@@ -20,16 +20,18 @@ class Ship
   end
 
   def coordinates
-    @size.times do |i|
-      case @direction[0].upcase
-      when 'N'
-        @coords << [ @location[0], (@location[1] - i) ]
-      when 'E'
-        @coords << [ (@location[0] - i), @location[1] ]
-      when 'S'
-        @coords << [ @location[0], (@location[1] + i) ]
-      when 'W'
-        @coords << [ (@location[0] + i), @location[1] ]
+    if @coords == []
+      @size.times do |i|
+        case @direction[0].upcase
+        when 'N'
+          @coords << [ @location[0], (@location[1] - i) ]
+        when 'E'
+          @coords << [ (@location[0] - i), @location[1] ]
+        when 'S'
+          @coords << [ @location[0], (@location[1] + i) ]
+        when 'W'
+          @coords << [ (@location[0] + i), @location[1] ]
+        end
       end
     end
     @coords
@@ -54,7 +56,7 @@ class Ship
   end
 
   def sunk?
-    if @coords - ["Hit"] == []; true else false end
+    @coords - ["Hit"] == [] ? true : false
   end
 
 end

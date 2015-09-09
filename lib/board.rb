@@ -1,8 +1,11 @@
 class Board
+  DEFAULT_BOARD_SIZE = [5,5]
+
   attr_reader :ships
 
-  def initialize
+  def initialize(board_size = DEFAULT_BOARD_SIZE)
     @ships = []
+    @board_size = board_size
   end
 
   #make ships
@@ -11,7 +14,7 @@ class Board
     ship.locate location
     ship.direct direction
     ship.coordinates
-    ship.on_board
+    ship.on_board(@board_size)
     @ships.each do |s|
         fail 'Ships overlap' if self.overlap?(ship, s)
     end
