@@ -9,7 +9,7 @@ class Ship
     fail "Size outside of range!" unless size_range.include?(size)
     @size = size
     @coords = []
-  endd
+  end
 
   def locate location
     @location = location
