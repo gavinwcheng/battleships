@@ -31,4 +31,20 @@ describe Game do
 			expect(subject.switch_turn).to eq "Next person's go"
 		end
   end
+
+  describe '#fire' do
+    it 'responds to fire with hit_coords' do
+     	expect(subject).to respond_to(:fire).with(1).argument
+    end
+
+    it 'returns you have won when opponents ship have all sunk' do
+  		ship = double :ship, locate: nil, direct: nil, coordinates: [[1,1]], on_board: true
+  		location = double :location
+  		direction = double :direction
+  		allow(ship).to receive(:hit?) {true}
+      allow(ship).to receive(:sunk?) {true}
+  		subject.boards[1].place ship, location, direction
+      expect(subject.fire([0,0])).to eq("you have won!")
+    end
+  end
 end

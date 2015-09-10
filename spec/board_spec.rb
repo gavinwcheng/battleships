@@ -93,7 +93,7 @@ describe Board do
     end
   end
 
-   describe '#lost' do
+  describe '#lost' do
     it 'returns "you have lost" when all ships sunk' do
       allow(ship).to receive(:hit?) {true}
       allow(ship).to receive(:sunk?) {true}
@@ -101,6 +101,7 @@ describe Board do
       subject.receive_fire([1,1])
       expect(subject.lost?).to eq(true)
     end
-
   end
+
+
 end
