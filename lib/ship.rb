@@ -5,7 +5,7 @@ class Ship
   attr_reader :location, :size, :size_range, :direction, :coords
 
   def initialize size = DEFAULT_SIZE
-    @size_range = [1, 2, 3, 4, 5]
+    @size_range = (1..5).to_a
     fail "Size outside of range!" unless size_range.include?(size)
     @size = size
     @coords = []

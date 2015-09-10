@@ -3,7 +3,7 @@ require_relative 'ship'
 class Board
   DEFAULT_BOARD_SIZE = [5,5]
 
-  attr_accessor :ships, :hits, :misses
+  attr_reader :ships, :hits, :misses
 
   def initialize(board_size = DEFAULT_BOARD_SIZE)
     @ships = []
