@@ -1,27 +1,22 @@
+require_relative 'board'
 
 class Game
 
-	attr_reader :boards
+	attr_reader :boards, :turn
 
-	def initialize(num_players, klass = Board.new(2))
-		@boards =[]
-		num_players.times do
-			@boards << klass
+	def initialize(board_size = [5,5])
+		@boards = []
+		@boards << Board.new
+		@boards << Board.new
+		@switch = true
+	end
 
-			
-		end
-  end
+  def turn
+	  @switch == true ? @turn = 1 : @turn = 0
+	end
 
+  def switch_turn
+	  @switch = !@switch
+		"Next person's go"
+	end
 end
-
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
